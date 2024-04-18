@@ -1,0 +1,78 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body {
+    background: none;
+    color: white;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.custom-navbar {
+    background: none;
+}
+
+.custom-card {
+    border-radius: 7px;
+    background: rgb(250, 250, 250);
+    border: none;
+    width: max-content;
+    padding: 1rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.bg-white-op50 {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-btn {
+    background: rgba(255, 255, 255, 0);
+    border-radius: 7px;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    width: max-content;
+    padding: 1rem;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+    .navbar-btn:hover {
+        color: white;
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    .navbar-btn .icon {
+        width: max-content;
+        height: 40px;
+        margin: auto 5px;
+    }
+
+.custom-card.bg-white-op50:hover {
+    background: white;
+}
+
+.container {
+    max-width: 2000px;
+    width: 90vw;
+}

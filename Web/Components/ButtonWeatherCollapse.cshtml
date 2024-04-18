@@ -1,0 +1,19 @@
+﻿<style>
+    .weather-collapse-detail {
+        display: none;
+        position: absolute;
+        bottom: -10px;
+        transform: translate(0, 100%);
+        left: 0;
+        padding: 1rem;
+        border-radius: 5px;
+        background: rgba(50, 50, 150);
+    }
+</style>
+
+<div class="position-relative">
+    <button id="btn-weather-collapse" class="btn navbar-btn py-1 px-3">Nghĩa Đô <img class="icon" src="/images/rain-cloud.png" alt="icon" /> 25C</button>
+    <div class="weather-collapse-detail">
+        <span class="loader"></span>
+    </div>
+</div>

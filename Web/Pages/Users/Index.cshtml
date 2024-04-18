@@ -1,0 +1,17 @@
+﻿@page
+@model Web.Pages.Users.IndexModel
+@{
+}
+
+<div class="container container-md">
+    <p>@Model.Users.Count()</p>
+    <ul class="list-group">
+        @foreach (var user in Model.Users)
+        {
+            <li class="list-group-item">
+                <p>@user.Username</p>
+                <p>@user.Phone</p>
+            </li>
+        }
+    </ul>
+</div>
