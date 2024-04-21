@@ -1,6 +1,5 @@
 ﻿using Domain.Domain.Entities;
 using Domain.Domain.Repositories.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Domain.Controllers
@@ -23,9 +22,8 @@ namespace Domain.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateOne([Bind("name,display")]Category category)
+        public async Task<IActionResult> CreateOne([Bind("name,display")] Category category)
         {
-            category.Guid = Guid.NewGuid();
             await _categoryRepository.InsertAsync(category);
             await _categoryRepository.SaveAsync();
 

@@ -1,0 +1,84 @@
+﻿img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+/* Main CSS */
+.grid-wrapper .news-board__item {
+    display: block;
+    background: rgba(30, 30, 30, 1);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.grid-wrapper .thumbnail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 70%;
+}
+
+.grid-wrapper .thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.grid-wrapper .content {
+    padding: 1rem;
+}
+
+.grid-wrapper {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-auto-rows: 200px;
+    grid-auto-flow: dense;
+}
+
+.grid-wrapper .wide {
+    grid-column: span 2;
+}
+
+.grid-wrapper .tall {
+    grid-row: span 2;
+}
+
+.grid-wrapper .big {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.news-board {
+    margin-top: 50vh;
+}
+
+.news-board__nav {
+    display: flex;
+    gap: 10px;
+}
+.news-board__item a {
+    text-decoration: none;
+    color: white;
+}
+
+.news-board__nav__item {
+    width: max-content;
+    border-radius: 5px;
+    background: rgba(30, 30, 30, 0.5);
+    color: white;
+    padding: 0;
+}
+
+.news-board__nav__item .active {
+    font-weight: bold;
+    background: rgba(30, 30, 100, 1);
+    padding: 0.5rem 1rem;
+}
+.news-board__nav__item .btn {
+    color: white;
+}

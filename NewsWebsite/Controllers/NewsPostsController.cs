@@ -1,5 +1,6 @@
 ﻿using Domain.Domain.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
+using NewsWebsite.Domain.Entities;
 
 namespace Domain.Controllers
 {
@@ -19,6 +20,23 @@ namespace Domain.Controllers
             var list = await _newsPostRepository.GetListAsync();
 
             return Ok(list);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateOne([Bind("guid,title,description,content,category,images")] NewsPost post)
+        {
+            post.Guid = Guid.NewGuid();
+            try
+            {
+                await _newsPostRepository.InsertAsync(post);
+                await _newsPostRepository.SaveAsync();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return NoContent();
         }
     }
 }

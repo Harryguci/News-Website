@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Domain.Entities
 {
-    public class Category : EntityBase
+    public class Category
     {
+        [Key]
         [Required]
         public string Name { get; set; } = string.Empty;
 

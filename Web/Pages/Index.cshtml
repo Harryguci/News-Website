@@ -3,6 +3,10 @@
 @{
     ViewData["Title"] = "Home page";
 }
+@section Styles {
+    <link href="~/css/newsBoard.css" rel="stylesheet" />
+}
+
 <div class="custom-card text-center mx-auto" style="background: rgba(255, 255, 255, 0.5); margin-bottom: 1rem;">
     <h1 class="display-4 text-dark">Welcome</h1>
 </div>
@@ -10,6 +14,7 @@
 <partial name="~/Components/SearchBar.cshtml" />
 <partial name="~/Components/NewsBoard.cshtml" />
 @section Scripts {
+    <script src="~/js/Newsboard/Newsboard.js"></script>
     <script type="text/javascript">
         $(function () {
             var backgroundUrl = `https://picsum.photos/1920/1080`;
