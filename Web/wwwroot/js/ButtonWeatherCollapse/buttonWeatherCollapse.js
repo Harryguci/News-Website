@@ -9,10 +9,6 @@
         const { latitude, longitude } = pos.coords;
         let location = {}
 
-        console.log("Your current position is:");
-        console.log(`Latitude : ${latitude}`);
-        console.log(`Longitude: ${longitude}`);
-
         location.lat = latitude;
         location.lng = longitude;
 
@@ -41,10 +37,19 @@
         var windElem = document.createElement('div');
         windElem.innerHTML = `<b style="margin-right: 10px;">Wind Speed</b> ${response.current.wind_mph} mph`;
 
+        var btnGoToDetailPage = document.createElement('a');
+        btnGoToDetailPage.href = '/Weather';
+        btnGoToDetailPage.classList.add('btn');
+        btnGoToDetailPage.classList.add('custom-btn');
+        btnGoToDetailPage.classList.add('text-white');
+        btnGoToDetailPage.classList.add('detail-btn');
+        btnGoToDetailPage.innerHTML = `Detail`;
+
         detailElement.appendChild(tempElem)
         detailElement.appendChild(conditionElem)
         detailElement.appendChild(uvElem)
         detailElement.appendChild(windElem)
+        detailElement.appendChild(btnGoToDetailPage)
 
         document.getElementById('btn-weather-collapse').innerHTML = `
             ${response.location.name}, ${response.location.country} 

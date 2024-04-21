@@ -5,6 +5,7 @@
 }
 @section Styles {
     <link href="~/css/newsBoard.css" rel="stylesheet" />
+    <link href="~/css/recentPostList.css" rel="stylesheet" />
 }
 
 <div class="custom-card text-center mx-auto" style="background: rgba(255, 255, 255, 0.5); margin-bottom: 1rem;">
@@ -12,13 +13,55 @@
 </div>
 
 <partial name="~/Components/SearchBar.cshtml" />
+<div class="recent-post-list">
+    <a href="/" class="recent-post-item">
+        <figure class="thumbnail recent-post-item__thumbnail">
+            <img src="" alt="image" />
+        </figure>
+        <div class="recent-post-item__content">
+            <p>Title</p>
+        </div>
+    </a>
+</div>
 <partial name="~/Components/NewsBoard.cshtml" />
 @section Scripts {
     <script src="~/js/Newsboard/Newsboard.js"></script>
     <script type="text/javascript">
         $(function () {
             var backgroundUrl = `https://picsum.photos/1920/1080`;
-            document.querySelector('html').style.backgroundImage = `url("${backgroundUrl}")`;
+            const highQualityImage = new Image();
+            document.querySelector('html').style.backgroundImage = `url("/images/blurimage.jpg")`;
+            highQualityImage.src = backgroundUrl;
+
+            highQualityImage.onload = function () {
+                console.log(highQualityImage.src);
+                document.querySelector('html').style.backgroundImage = `url("${highQualityImage.src}")`;
+            };
         });
+
+        $(function () {
+            var recents = localStorage.getItem('recent-posts');
+            const recentElem = document.querySelector('.recent-post-list');
+
+            const CreateItem = (item) => {
+                return `<a target="_blank" href="${item.url}" class="recent-post-item">
+                            <figure class="thumbnail recent-post-item__thumbnail">
+                                <img src="${item.urlToImage}" alt="image" />
+                            </figure>
+                            <div class="recent-post-item__content">
+                                <p style="margin: 0;">${item.title}</p>
+                            </div>
+                        </a>`
+            }
+
+            recents = JSON.parse(recents);
+
+            console.log(recents);
+
+            recentElem.innerHTML = '';
+            Array.from(recents).map(post => {
+                recentElem.innerHTML += CreateItem(post);
+            })
+        })
     </script>
 }

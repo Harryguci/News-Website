@@ -20,6 +20,8 @@ html {
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;
+    scroll-behavior: smooth;
+    transition: background-image 1s;
 }
 
 body {
