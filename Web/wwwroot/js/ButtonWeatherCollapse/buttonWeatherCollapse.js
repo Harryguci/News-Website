@@ -1,8 +1,15 @@
 ﻿$(async function () {
-
     const key = await fetch('./secret.json')
         .then((response) => response.json())
-        .then((json) => json.WeatherApiKey);
+        .then((json) => json.WeatherApiKey)
+        .catch(err =>
+            swal({
+                title: "ERROR!",
+                text: err.message,
+                icon: "error",
+                button: "Ok",
+            }));
+
     var response = null;
 
     const success = async (pos) => {
@@ -14,7 +21,13 @@
 
         response = await fetch(`https://api.weatherapi.com/v1/current.json?q=${location.lat},${location.lng}&lang=vi&key=${key}`)
             .then(response => response.json())
-            .catch(err => window.alert(JSON.stringify(err)));
+            .catch(err =>
+                swal({
+                    title: "ERROR!",
+                    text: err.message,
+                    icon: "error",
+                    button: "Ok",
+                }));
 
         var detailElement = document.querySelector('.weather-collapse-detail');
         detailElement.innerHTML = '';

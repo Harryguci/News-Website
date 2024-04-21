@@ -1,19 +1,46 @@
-let page = 1;
+﻿let page = 1;
 let pageSize = 20;
 const types = ["", "tall", "wide", "big"]
+const categories = [
+    {
+        name: "khampha",
+        query: "Khám phá"
+    },
+    {
+        name: "Game",
+        query: "Game"
+    },
+    {
+        name: "taichinh",
+        query: "Finance, tài chính"
+    },
+    {
+        name: "thoitiet",
+        query: "weather"
+    },
+    {
+        name: "tintuc",
+        query: "Tin tức"
+    },
+    {
+        name: "thethao",
+        query: "sport"
+    }
+]
 const category = {
-    display: "Kh�m ph�",
+    display: "Khám phá",
     name: "khampha"
 };
 let idFetchDataTimeout = null;
+let newsApiKey = "";
 
 function NewsBoardItem(title, url, urlToImage) {
     const num = parseInt(Math.random() * 10 % 4);
-    title = title.replace(/(['"])/g, "\\$1");
+    title = title.replace(/(['"])/g, "\$1");
 
     return `<div class="news-board__item ${types[num]}" onClick="RememberAction({ title : '${title}', url : '${url}', urlToImage: '${urlToImage}'})">
             <a target="_blank" href="${url}" class="thumbnail">
-                <img loading="lazy" src="${urlToImage}" alt="" />
+                <img loading="lazy" src="${urlToImage || 'no-image.png'}" alt="${title}" />
             </a>
             <div class="content">
                 <a target="_blank" href="${url}"><p>${title}</p></a>
@@ -28,28 +55,40 @@ function NavComponent(category, className) {
         </div>`
 }
 
-window.addEventListener('load', (event) => {
+async function GetKey() {
+    newsApiKey = await fetch('./secret.json')
+        .then((response) => response.json())
+        .then((json) => json.NewsApiKey)
+        .catch(err =>
+            swal({
+                title: "ERROR!",
+                text: err.message,
+                icon: "error",
+                button: "Ok",
+            }));
+
+    //window.newsApiKey = newsApiKey;
+    return newsApiKey;
+}
+
+window.addEventListener('load', async (event) => {
     window.scrollTo(0, 0);
+    await GetKey();
 });
 
 window.handlechangecategory = async function handlechangecategory(categoryName, categoryDisplay) {
-    //swal({
-    //    title: "Success!",
-    //    text: category,
-    //    icon: "success",
-    //    button: "Ok",
-    //});
-
-    var navItems = document.querySelectorAll('.news-board__nav__item .custom-btn');
+    const navItems = document.querySelectorAll('.news-board__nav__item .custom-btn');
 
     Array.from(navItems).map(item => {
         item.classList.remove('active');
     })
 
     document.querySelector(`#news-board__nav__item__${categoryName}`).classList.add('active');
-
     const newsBoardMain = document.querySelector('.news-board-main');
-    await fetch(`https://newsapi.org/v2/everything?q=${categoryDisplay}&apiKey=cd426c550ab842e1b03296aaa5e666e4`)
+    const matchItem = categories.filter(item => item.name === categoryName);
+    const query = matchItem.length ? categories.filter(item => item.name === categoryName)[0].query : categoryDisplay;
+
+    await fetch(`https://newsapi.org/v2/everything?q=${query}&apiKey=${newsApiKey}`)
         .then(response => response.json())
         .then(data => {
             newsBoardMain.innerHTML = '';
@@ -87,11 +126,17 @@ function RememberAction(post) {
 
 async function RefreshData(cb) {
     const newsBoardMain = document.querySelector('.news-board-main');
+    if (!newsApiKey)
+        await GetKey();
+
     if (idFetchDataTimeout) clearTimeout(idFetchDataTimeout);
 
+    var matchedItem = categories.filter(item => item.name === category.name);
+    
+    var query = matchedItem.length ? categories.filter(item => item.name === category.name)[0].query : category.display;
     if (category.name)
         idFetchDataTimeout = setTimeout(async () => {
-            await fetch(`https://newsapi.org/v2/everything?q=${category.display}&page=${page}&pageSize=${pageSize}&apiKey=cd426c550ab842e1b03296aaa5e666e4`)
+            await fetch(`https://newsapi.org/v2/everything?q=${query}&page=${page}&pageSize=${pageSize}&apiKey=${newsApiKey}`)
                 .then(response => response.json())
                 .then(data => {
                     var articles = data.articles;
@@ -103,7 +148,7 @@ async function RefreshData(cb) {
         }, 300);
     else
         idFetchDataTimeout = setTimeout(async () => {
-            await fetch(`https://newsapi.org/v2/top-headlines?country=us&page=${page}&pageSize=${pageSize}&apiKey=cd426c550ab842e1b03296aaa5e666e4`)
+            await fetch(`https://newsapi.org/v2/top-headlines?country=us&page=${page}&pageSize=${pageSize}&apiKey=${newsApiKey}`)
                 .then(response => response.json())
                 .then(data => {
                     var articles = data.articles;

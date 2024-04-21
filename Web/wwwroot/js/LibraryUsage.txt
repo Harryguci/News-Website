@@ -1,0 +1,8 @@
+﻿1. Sweet Alert
+
+swal({
+    title: "ERROR!",
+    text: err.message,
+    icon: "error",
+    button: "Ok",
+});
