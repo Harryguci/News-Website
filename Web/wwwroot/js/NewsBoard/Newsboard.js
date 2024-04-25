@@ -38,14 +38,14 @@ function NewsBoardItem(title, url, urlToImage) {
     const num = parseInt(Math.random() * 10 % 4);
     title = title.replace(/(['"])/g, "\$1");
 
-    return `<div class="news-board__item ${types[num]}" onClick="RememberAction({ title : '${title}', url : '${url}', urlToImage: '${urlToImage}'})">
+    return `<div class="news-board__item ${types[num]}" onClick="RememberAction({title:'${title}',url:'${url}',urlToImage:'${urlToImage}'})">
             <a target="_blank" href="${url}" class="thumbnail">
-                <img loading="lazy" src="${urlToImage || 'no-image.png'}" alt="${title}" />
+            <img loading="lazy" src="${urlToImage || 'no-image.png'}" alt="${title}" />
             </a>
             <div class="content">
-                <a target="_blank" href="${url}"><p>${title}</p></a>
+            <a target="_blank" href="${url}"><p>${title}</p></a>
             </div>
-        </div>`
+            </div>`
 }
 function NavComponent(category, className) {
     return `
@@ -132,7 +132,7 @@ async function RefreshData(cb) {
     if (idFetchDataTimeout) clearTimeout(idFetchDataTimeout);
 
     var matchedItem = categories.filter(item => item.name === category.name);
-    
+
     var query = matchedItem.length ? categories.filter(item => item.name === category.name)[0].query : category.display;
     if (category.name)
         idFetchDataTimeout = setTimeout(async () => {

@@ -15,9 +15,33 @@
         color: white;
         width: 100%;
     }
-
+    .search-results {
+        position: absolute;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        min-width: 50vw;
+        max-width: 1000px;
+        z-index: 10;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+    .search-results a {
+        text-decoration: none;
+        color: black;
+    }
 </style>
-<div class="search-bar mx-auto">
-    <label class="d-flex h-100 px-2 my-auto" style="margin-right: 10px"><i class="fa-solid fa-magnifying-glass m-auto"></i></label>
-    <input type="text" class="py-1" placeholder="Tìm kiếm trên Web" />
+<div>
+    <div id="search-bar-top" class="search-bar mx-auto">
+        <label class="d-flex h-100 px-2 my-auto" style="margin-right: 10px"><i class="fa-solid fa-magnifying-glass m-auto"></i></label>
+        <input class="search-input py-1" type="text" placeholder="Tìm kiếm trên Web" />
+    </div>
+    <div class="search-results mx-auto">
+        <ul class="list-group">
+            @* <li key="1" class="list-group-item">
+                <a href="/item-url">
+                    <p class="fw-bold m-0 text-primary">Title</p>
+                    <p class="m-0" style="font-size: 10px">Description Description Description Description Description Description Description</p>
+                </a>
+            </li> *@
+        </ul>
+    </div>
 </div>

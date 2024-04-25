@@ -50,6 +50,10 @@ body {
     background: rgba(255, 255, 255, 0.5);
 }
 
+.navbar-brand {
+    filter: drop-shadow(2px 2px 5px rgba(255, 255, 255,0.5));
+}
+
 .navbar-btn {
     background: rgba(255, 255, 255, 0);
     border-radius: 7px;
@@ -80,3 +84,62 @@ body {
     max-width: 2000px;
     width: 90vw;
 }
+
+#main-menu {
+    position: absolute;
+    bottom: 0;
+    transform: translate(0, calc(100% + 10px));
+    color: white;
+    background: rgb(50, 50, 50);
+    border-radius: 10px;
+    overflow: hidden;
+    height: auto;
+    max-height: 0px;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.25s ease-in;
+}
+
+#main-menu.show {
+    transition: all 0.25s ease-in;
+    max-height: 500px;
+
+    animation-name: show-mainmenu;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+}
+
+@keyframes show-mainmenu {
+    0% {
+        opacity: 0;
+        transform: translate(0, calc(100% + 10px));
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0, 100%);
+    }
+}
+
+#main-menu a {
+    text-decoration: none;
+    color: white;
+}
+
+    #main-menu a:hover {
+        color: rgb(200, 200, 255);
+    }
+
+#main-menu ul {
+    background: none;
+}
+
+    #main-menu ul li {
+        padding: 0;
+        background: none;
+    }
+
+        #main-menu ul li a {
+            display: block;
+            padding: 14px 2rem;
+        }
